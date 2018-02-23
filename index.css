@@ -1,0 +1,289 @@
+/*
+dark : #283ba9
+middle : #5e69ed
+clear : #c7d6ff
+very clear : #f2f5fd
+*/
+
+body
+{
+	margin: 10px 0 ;
+	padding: 0 ;
+	text-align: center ;
+	font: 0.8em "Trebuchet MS", helvetica, sans-serif ;
+}
+
+/* Parallax */
+
+.parallax
+{
+    background: url(images/fond2.jpg);
+    width:1366px;
+    height:1000px;
+    position: relative;
+		z-index: -100;
+	  margin-left: auto;
+	 	margin-right: auto;
+	 	text-align: center;
+}
+
+div#conteneur
+{
+	width: 770px ;
+	margin: 0 auto ;
+	text-align: left ;
+	border: 2px solid #283ba9 ;
+	background: #fff ;
+	z-index: 100;
+}
+
+h1#header a
+{
+	width: 770px ;
+	height: 300px ;
+	margin: 0 ;
+	display: block ;
+	background: url(images/banniere1.jpg) no-repeat left top ;
+}
+
+ul#menu
+{
+	height: 35px ;
+	margin: 0 ;
+	padding: 0 ;
+	background: url(images/bg_menu.gif) repeat-x 0 -25px ;
+	list-style-type: none ;
+}
+
+ul#menu li
+{
+	float: left ;
+	text-align: center ;
+}
+
+ul#menu li a
+{
+	width: 120px ;
+	line-height: 25px ;
+	font-size: 1.2em ;
+	font-weight: bold ;
+	letter-spacing: 2px ;
+	color: #283ba9 ;
+	display: block ;
+	text-decoration: none ;
+	border-right: 2px solid  #283ba9 ;
+}
+
+ul#menu li a:hover
+{
+	background: url(images/bg_menu.gif) repeat-x 0 0 ;
+	color: #c7d6ff ;
+}
+
+div#contenu
+{
+	padding: 0 25px 0 25px ;
+}
+
+div#contenu h2
+{
+	padding-left: 25px ;
+	line-height: 25px ;
+	font-size: 1.4em ;
+	background: url(images/megusta.png) no-repeat left ;
+	background-size: 20px;
+	color: #283ba9 ;
+	border-bottom: 1px solid #283ba9 ;
+}
+
+div#contenu h3
+{
+	margin-left: 15px ;
+	padding-left: 5px ;
+	border-bottom: 1px solid #5e69ed ;
+	border-left: 3px solid #5e69ed ;
+	color: #5e69ed ;
+}
+
+div#contenu p
+{
+	text-align: justify ;
+	text-indent: 2em ;
+	line-height: 1.7em ;
+}
+
+div#contenu a
+{
+	color: #5e69ed ;
+}
+
+div#contenu a:hover
+{
+	color: #c7d6ff ;
+}
+
+p#footer
+{
+	margin: 0 ;
+	padding-right: 10px ;
+	line-height: 30px ;
+	text-align: right ;
+	color: #5e69ed ;
+}
+img#base
+{
+	max-width:500px;
+	height:auto;
+	margin-left:100px;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+}
+
+img#base:active{
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+
+/*Personnalisation tags*/
+
+
+ul#tags li
+{
+	display:inline-block;
+	margin-right: 10px;
+	font-weight: bold ;
+	letter-spacing: 2px ;
+	color: #283ba9 ;
+	border: 1px solid  #283ba9 ;
+	border-radius: 10px ;
+	padding: 4px 10px 4px 10px;
+	background-color: #c7d6ff ;
+}
+
+input#newtag {
+	display:inline-block;
+	letter-spacing: 2px ;
+	color: #283ba9 ;
+	border: 1px solid  #283ba9 ;
+	border-radius: 10px ;
+	background-color : #f2f5fd;
+	padding: 4px 10px 4px 10px;
+	width:40px;
+}
+
+ul#tags a
+{
+	font-size: 1em;
+	display:inline-block;
+	font-weight:lighter;
+	color: #283ba9 ;
+	background-color: #c7d6ff ;
+}
+
+ul#tags a:hover
+{
+	color: #000 ;
+	font-weight:bold;
+	cursor :pointer;
+}
+
+ul#tags p
+{
+	display:inline-block;
+}
+
+/* Personnalisation formulaire */
+
+input[type=submit] {
+		margin-top: 20px;
+    padding:5px 15px;
+    background:#c7d6ff;
+    color : #283ba9;
+    -webkit-border-color: #c7d6ff;
+    border-color: #283ba9;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=submit]:hover{
+  background: #283ba9;
+  color: #c7d6ff;
+}
+
+input[type=button] {
+    padding:5px 15px;
+    background:#c7d6ff;
+    color : #283ba9;
+    -webkit-border-color: #c7d6ff;
+    border-color: #283ba9;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=button]:hover{
+  background: #283ba9;
+  color: #c7d6ff;
+}
+
+input
+{
+	margin-bottom:15px;
+}
+
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+.css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+
+/* Carousel */
+
+.ng-carousel {
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+  width: 770px;
+  height: 300px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.ng-carousel img#carousel{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ng-carousel slidecontainer {
+  display: block;
+	text-align: center;
+  position: relative;
+  top: 0;
+  width: 770px;
+  height: 100%;
+  z-index: 1;
+  font-size: 0;
+}
+.ng-carousel slidecontainer.carousel-animate {
+  -webkit-transition: -webkit-transform 0.5s ease-out 0s;
+  -moz-transition: -moz-transform 0.5s ease-out 0s;
+  -ms-transition: -ms-transform 0.5s ease-out 0s;
+  -o-transition: -o-transform 0.5s ease-out 0s;
+  transition: transform 0.5s ease-out 0s;
+}
+.ng-carousel slide {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}

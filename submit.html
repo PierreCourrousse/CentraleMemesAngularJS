@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<h2>Toi aussi participe à NOTRE PROJEEEEEET</h2>
+<p>Merci de remplir le formulaire ci-dessous afin de laisser une trace dans l'histoire des memes centraliens.</p>
+<p>Qui sait, peut-être que ton meme sera le prochain numéro 1 dans le Hall of Fame...</p>
+<h3>Formulaire de soumission</h3>
+<div ng-controller="FormController" id="contenu">
+	<form class="simple-form">
+		<label>Ton nom:  <input type="text" ng-model="user.name"/></label><br />
+		<label>Ta promo:  <input type="radio" ng-model="user.promo" value="1A" />1A (caca)</label>
+		<label><input type="radio" ng-model="user.promo" value="2A" />2A (dépressif)</label>
+		<label><input type="radio" ng-model="user.promo" value="3A" />3A (aigri)</label>
+		<label><input type="radio" ng-model="user.promo" value="3A+" />VieuxA (bientôt la retraite)</label><br/>
+		<label>Ton meme:  <input type="button" id="loadFileImg" value="Parcourir les fichiers..." onclick="document.getElementById('file').click();" />
+			<input type="file" style="display:none;" id="file" name="file"/></label><br/>
+		<label>Ton commentaire:  <input type="text" ng-model="user.comment"/></label><br />
+		<div style="text-align:center;"><input type="submit" ng-click="update(user)" value="Soumettre" /></div>
+		<p style="text-align: center;">{{message}}</p>
+	</form>
+	<pre>name = {{user.name}}</pre>
+	<pre>user = {{user | json}}</pre>
+	<pre>master = {{master | json}}</pre>
+</div>
+</html>

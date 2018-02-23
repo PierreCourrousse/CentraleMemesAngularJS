@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="myApp">
+  <head>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" type="text/css" href="index.css">
+  	  <link rel="icon" href="images/nyancat.png">
+      <title>Centrale Memes</title>
+      <!-- la base -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+      <!-- pour le changement de page rapide -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+      <!-- carousel -->
+      <script src="http://hammerjs.github.io/dist/hammer.min.js"></script>
+      <script src="angular-carousel.js"></script>
+  </head>
+
+  <body>
+    <div perfect-parallax parallax-ratio="0.1" parallax-css="transform:translateY">
+        <div perfect-parallax parallax-ratio="0.5" parallax-css="background-position-y" parallax-init-val="-100" class="parallax">
+            <div id="conteneur">
+                <div ng-controller="CarouselController">
+                    <div ng-carousel ng-carousel-name="example-carousel4" ng-carousel-timer="4000">
+                          <slidecontainer>
+                              <slide ng-repeat="image in slides">
+                                  <img id="carousel" src="{{image}}"/>
+                              </slide>
+                          </slidecontainer>
+                    </div>
+                </div>
+            		<nav>
+            			  <ul id="menu">
+            					<li><a href="#/!">Accueil</a></li>
+            					<li><a href="#!top">Top</a></li>
+            					<li><a href="#!flop">Flop</a></li>
+            					<li><a href="#!submit">Soumettre</a></li>
+            			  </ul>
+            		</nav>
+          		  <div ng-view id="contenu" style="margin-bottom:50px;"></div>
+        	  </div>
+        </div>
+      </div>
+
+	<script type="text/javascript">
+		var app = angular.module("myApp", ["ngRoute",'angular-carousel']);
+
+    // Navigation par routeur
+		app.config(function($routeProvider) {
+			$routeProvider
+			.when("/", {
+				templateUrl : "recent.html",
+        controller : "RecentController"
+			})
+			.when("/top", {
+				templateUrl : "top.html",
+        controller : "TopController"
+			})
+			.when("/flop", {
+				templateUrl : "flop.html",
+        controller : "FlopController"
+			})
+			.when("/submit", {
+				templateUrl : "submit.html",
+        controller : "RecentController"
+			});
+		});
+
+    // Carousel
+    app.controller("CarouselController", function($scope,Carousel){
+      $scope.Carousel = Carousel;
+      $scope.slides = ["images/banniere1.jpg","images/banniere2.jpg","images/banniere3.jpg","images/banniere4.jpg"];
+    });
+
+    // Affichage des images
+    app.controller("RecentController", function($scope) {
+      $scope.images = ["recent1.jpg","recent2.jpg","recent3.jpg","recent4.jpg","recent5.jpg"];
+    });
+
+    app.controller("TopController", function($scope) {
+      $scope.images = ["top1.jpg","top2.jpg","top3.jpg","top4.jpg","top5.jpg"];
+    });
+
+    app.controller("FlopController", function($scope) {
+      $scope.images = ["flop1.jpg","flop2.jpg","flop3.jpg","flop4.jpg","flop5.jpg"];
+    });
+
+    // Formulaire de la page submit
+		app.controller('FormController', ['$scope', function($scope) {
+			  $scope.master = {};
+        $scope.data = 'none' ;
+        $scope.message = "";
+			  $scope.update = function(user) {
+          //lecture et upload de l'image
+          var f = document.getElementById('file').files[0],
+              r = new FileReader();
+          if (!f) { // si pas de fichier
+              $scope.message = "Vous devez choisir une image à soumettre.";
+              return;
+          }
+
+          r.onloadend = function(e) {
+    				  var data = e.target.result;
+    				  data = "data:image/jpg;base64," + String(data);
+              $scope.images.splice(0, 0, data)
+          }
+          r.readAsBinaryString(f)
+          //copie de user dans master
+  				$scope.master = angular.copy(user);
+          $scope.user = null;
+          $scope.message = "Votre soumission a bien été faite !"
+			  };
+			}]);
+
+      //Controller du système d'ajout de tags
+      app.controller("TagsController", function($scope) {
+        $scope.tags = ["True Story"];
+        $scope.addItem = function () {
+            $scope.errortext = "";
+            if (!$scope.addMe) {return;}
+            if ($scope.tags.indexOf($scope.addMe) == -1) {
+                // -1 veut dire qu'il n'est pas dans la liste
+                $scope.tags.push($scope.addMe);
+                $scope.addMe = null;
+            } else {
+                $scope.errortext = "Le tag est déjà dans la liste.";
+            }
+        }
+        $scope.removeItem = function (x) {
+            $scope.errortext = "";
+            $scope.tags.splice(x, 1);
+        }
+      });
+
+      //Déclencheur sur l'appui de la touche Entrée
+      app.directive('myEnter', function () {
+          return function (scope, element, attrs) {
+              // element.bind avec "keydown keypress" assigne l'appui d'une touche à une action
+              element.bind("keydown keypress", function (event) {
+                  // 13 est la valeur de la touche Entrée
+                  if(event.which === 13) {
+                      scope.$apply(function (){
+                          // on va déclencher l'événement my-enter
+                          scope.$eval(attrs.myEnter);
+                      });
+
+                      event.preventDefault();
+                  }
+              });
+          };
+      });
+
+      // Parallax
+      app.directive('perfectParallax', [
+        '$window', function ($window) {
+
+          return {
+            restrict: 'A',
+            scope: {
+              parallaxCss: '@',
+              parallaxInitVal: '@',
+              parallaxRatio: '@'
+            },
+            link: function(iScope, iElem, iAttr) {
+              var cssKey,
+                cssValue,
+                isSpecialVal,
+                parallaxCssVal,
+                parallaxOffset,
+                parallaxRatio,
+                parallaxInitVal,
+                cssValArray;
+
+              parallaxCssVal = iScope.parallaxCss ? iScope.parallaxCss : 'top';
+              cssValArray = parallaxCssVal.split(':');
+              cssKey = cssValArray[0];
+              cssValue = cssValArray[1];
+
+              isSpecialVal = cssValue ? true : false;
+              if (!cssValue) cssValue = cssKey;
+
+              parallaxRatio = iScope.parallaxRatio ? +iScope.parallaxRatio : 1.1;
+              parallaxInitVal = iScope.parallaxInitVal ? +iScope.parallaxInitVal : 0;
+
+              iElem.css(cssKey, parallaxInitVal + 'px');
+
+              function _onScroll() {
+                var resultVal;
+                var calcVal = $window.pageYOffset * parallaxRatio + parallaxInitVal;
+
+                if (isSpecialVal) {
+                  resultVal = '' + cssValue + '(' + calcVal + 'px)';
+                } else {
+                  resultVal = calcVal + 'px';
+                }
+                iElem.css(cssKey, resultVal);
+              };
+
+              $window.addEventListener('scroll', _onScroll);
+
+            }
+          };
+        }
+      ]);
+
+	</script>
+
+  </body>
+</html>

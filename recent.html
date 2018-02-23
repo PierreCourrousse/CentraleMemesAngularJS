@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<h2>Bienvenue sur le merveilleux site le plus merveilleux de tous les sites merveilleux</h2>
+<p>Ce site est destiné à récolter ce qui se fait de mieux en matières de memeries à l'École Centrale de Marseille, une école où les élèves savent se démarquer par leur créativité et leur esprit critique à l'égard de leur formation. </p>
+<p>Si tu es toi aussi un centralien qui a du temps à perdre, n'hésite pas à contribuer et à poster toi-aussi de quoi faire rire tes camarades et les autres visiteurs de ce site (tels que les hackeurs russes).</p>
+<h2>Les memes récents</h2>
+<p>Voici les mêmes tout frais sorti du four rien que pour vous.</p>
+<div ng-repeat="image in images" ng-controller="TagsController">
+  <h3>Posté en janvier 2018 par Anonyme</h3>
+  <ul id="tags">
+    <li ng-repeat="x in tags">
+      {{x}}
+      <span ng-click="removeItem($index)"><a>X</a></span>
+    </li>
+    <input id="newtag" ng-model="addMe" my-enter="addItem()"></input>
+    <p>{{errortext}}</p>
+  </ul>
+  <img id="base" src="memes/{{image}}"></img>
+</div>
+</html>

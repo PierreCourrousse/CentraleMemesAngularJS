@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<h2>Les memes les moins merveilleux</h2>
+<p>Parce qu'on ne peut pas réussir du premier coup, certains memes ont fait un flop. Mais bon certains aimeront les vilains petits canards n'ayant pas trouvé le succès.</p>
+<div ng-repeat="image in images" ng-controller="TagsController">
+  <h3>Posté en janvier 2018 par Anonyme</h3>
+  <ul id="tags">
+    <li ng-repeat="x in tags">
+      {{x}}
+      <span ng-click="removeItem($index)"><a>X</a></span>
+    </li>
+    <input id="newtag" ng-model="addMe" my-enter="addItem()"></input>
+    <p>{{errortext}}</p>
+  </ul>
+  <img id="base" src="memes/{{image}}"></img>
+</div>
+</html>

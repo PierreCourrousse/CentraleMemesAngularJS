@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<h2>Les meilleurs memes centraliens de tous les temps</h2>
+<p>Le Hall of Fame des memes centraliens, ceux qui font le prestige de la communauté de memeurs de Centrale.</p>
+<div ng-repeat="image in images" ng-controller="TagsController">
+  <h3>Posté en janvier 2018 par Anonyme</h3>
+  <ul id="tags">
+    <li ng-repeat="x in tags">
+      {{x}}
+      <span ng-click="removeItem($index)"><a>X</a></span>
+    </li>
+    <input id="newtag" ng-model="addMe" my-enter="addItem()"></input>
+    <p>{{errortext}}</p>
+  </ul>
+  <img id="base" src="memes/{{image}}"></img>
+</div>
+</html>
